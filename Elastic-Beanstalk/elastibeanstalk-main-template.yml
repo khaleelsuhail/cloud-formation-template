@@ -56,8 +56,7 @@ Parameters:
     BastionHostSecurityGroup:
       Type: AWS::EC2::SecurityGroup::Id
       Description: "Select Security Group of Bastion Host/Jump Host for SSH access"
-
-  
+ 
 Resources:
   ECRStack:
     Type: AWS::CloudFormation::Stack
