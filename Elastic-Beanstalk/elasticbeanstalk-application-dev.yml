@@ -6,18 +6,12 @@ Parameters:
     ECRDevName:
       Type: String
       Description: "Specify the Dev ECR Name"
-    ECRProdName:
-      Type: String
-      Description: "Specify the Prod ECR Name"
     S3BucketName:
       Type: String
       Description: "Bucket Name for configuration for ElasticBeanStalk application"
     EBDevAppS3KeyName:
       Type: String
       Description: "Key name for dev environment for e.g dev if you have created dev.zip"
-    EBProdAppS3KeyName:
-      Type: String
-      Description: "Key name for prod environment for e.g prod if you have created prod.zip"
     VPC:
       Type: String
       Description: "Select the right VPC"
@@ -36,15 +30,9 @@ Parameters:
     EBDevCname:
       Type: String
       Description: "CNAME for Dev Elastic Beanstalk environment"
-    EBProdCname:
-      Type: String
-      Description: "CNAME for Prod Elastic Beanstalk environment"
     EBDevACMArn:
       Type: String
       Description: "ACM Arn for Dev Elastic Beanstalk environment"
-    EBProdACMArn:
-      Type: String
-      Description: "ACM Arn for Prod Elastic Beanstalk environment"
     EBKeyPair:
       Type: String
       Description: "Specify the right key pair required for SSH access"
@@ -72,14 +60,7 @@ Resources:
         SourceBundle:
             S3Bucket: !Ref S3BucketName
             S3Key: !Join [ '.', [!Ref EBDevAppS3KeyName, 'zip'] ]
-    EBProdAppVersion:
-     Type: AWS::ElasticBeanstalk::ApplicationVersion
-     Properties: 
-        ApplicationName: !Ref EBApp
-        SourceBundle:
-            S3Bucket: !Ref S3BucketName
-            S3Key: !Join [ '.', [!Ref EBProdAppS3KeyName, 'zip'] ]
-
+    
     EBEnvDev:
      Type: AWS::ElasticBeanstalk::Environment
      Properties: 
