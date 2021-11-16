@@ -6,9 +6,7 @@ Parameters:
     ECRDevName:
       Type: String
       Description: "Specify the Dev ECR Name"
-    ECRProdName:
-      Type: String
-      Description: "Specify the Prod ECR Name"
+   
     ECRDeployPolicy: 
       Type: String
       Description: "ECR Deploy Policy Name"
@@ -21,9 +19,7 @@ Parameters:
     EBDevAppS3KeyName:
       Type: String
       Description: "Key name for dev environment for e.g dev if you have created dev.zip"
-    EBProdAppS3KeyName:
-      Type: String
-      Description: "Key name for prod environment for e.g prod if you have created prod.zip"
+    
     VPC:
       Type: AWS::EC2::VPC::Id
       Description: "Select the right VPC"
@@ -42,15 +38,11 @@ Parameters:
     EBDevCname:
       Type: String
       Description: "CNAME for Dev Elastic Beanstalk environment"
-    EBProdCname:
-      Type: String
-      Description: "CNAME for Prod Elastic Beanstalk environment"
+    
     EBDevACMArn:
       Type: String
       Description: "ACM Arn for Dev Elastic Beanstalk environment"
-    EBProdACMArn:
-      Type: String
-      Description: "ACM Arn for Prod Elastic Beanstalk environment"
+    
     EBKeyPair:
       Type: AWS::EC2::KeyPair::KeyName
       Description: "Specify the right key pair required for SSH access"
@@ -74,8 +66,7 @@ Resources:
       Parameters:
         ProjectName: !Ref ProjectName
         ECRDevName: !Ref ECRDevName
-        ECRProdName: !Ref ECRProdName
-
+        
   IAMStack:
     Type: AWS::CloudFormation::Stack
     Properties:
@@ -84,7 +75,6 @@ Resources:
         ProjectName: !Ref ProjectName
         ECRDeployPolicy: !Ref ECRDeployPolicy
         ECRDevNameArn: !GetAtt ECRStack.Outputs.ECRDevNameArn
-        ECRProdNameArn: !GetAtt ECRStack.Outputs.ECRProdNameArn
         DeployUser: !Ref DeployUser
   EBApplicationStack:
     Type: AWS::CloudFormation::Stack
@@ -93,19 +83,15 @@ Resources:
       Parameters:
         ProjectName: !Ref ProjectName
         ECRDevName: !Ref ECRDevName
-        ECRProdName: !Ref ECRProdName
         S3BucketName: !Ref S3BucketName
         EBDevAppS3KeyName: !Ref EBDevAppS3KeyName
-        EBProdAppS3KeyName: !Ref ECRProdName
         VPC: !Ref VPC
         VPCPrivateSub1: !Ref VPCPrivateSub1
         VPCPrivateSub2: !Ref VPCPrivateSub2
         VPCPublicSub1: !Ref VPCPublicSub1
         VPCPublicSub2: !Ref VPCPublicSub2
         EBDevCname: !Ref EBDevCname
-        EBProdCname: !Ref EBProdCname
         EBDevACMArn: !Ref EBDevACMArn
-        EBProdACMArn: !Ref EBProdACMArn
         EBKeyPair: !Ref EBKeyPair
         EBInstanceType: !Ref EBInstanceType
         InstanceProfile: !GetAtt IAMStack.Outputs.InstanceProfile
