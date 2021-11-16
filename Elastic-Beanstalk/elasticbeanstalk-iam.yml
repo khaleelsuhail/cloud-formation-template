@@ -9,9 +9,7 @@ Parameters:
     ECRDevNameArn:
       Type: String
       Description: "ECR Dev Name ARN"
-    ECRProdNameArn:
-      Type: String
-      Description: "ECR Prod Name ARN"
+    
     DeployUser:
       Type: String
       Description: "Username for access to ECR"
@@ -31,7 +29,7 @@ Resources:
                   - 'ecr:ListImages'
                 Resource: 
                   - !Ref ECRDevNameArn
-                  - !Ref ECRProdNameArn
+                
               -
                 Sid: GetAuthorizationToken
                 Effect: Allow
@@ -56,7 +54,7 @@ Resources:
                   - ecr:PutImage
                 Resource: 
                   - !Ref ECRDevNameArn
-                  - !Ref ECRProdNameArn
+                  
     InstanceProfileRole:
       Type: AWS::IAM::Role
       Properties:
