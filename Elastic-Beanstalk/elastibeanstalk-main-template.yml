@@ -62,7 +62,7 @@ Resources:
   ECRStack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: "<path on your S3 bucket>/ecr-dev-prod.yaml"
+      TemplateURL: "<path on your S3 bucket>/ecr-dev.yml"
       Parameters:
         ProjectName: !Ref ProjectName
         ECRDevName: !Ref ECRDevName
@@ -70,7 +70,7 @@ Resources:
   IAMStack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: "<path on your S3 bucket>/elasticbeanstalk-iam.yaml"
+      TemplateURL: "<path on your S3 bucket>/elasticbeanstalk-iam.yml"
       Parameters:
         ProjectName: !Ref ProjectName
         ECRDeployPolicy: !Ref ECRDeployPolicy
@@ -79,7 +79,7 @@ Resources:
   EBApplicationStack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: "<path on your S3 bucket>/elasticbeanstalk-application-dev-prod.yaml"
+      TemplateURL: "<path on your S3 bucket>/elasticbeanstalk-application-dev.yml"
       Parameters:
         ProjectName: !Ref ProjectName
         ECRDevName: !Ref ECRDevName
